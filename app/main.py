@@ -4,7 +4,7 @@ from fastapi import FastAPI
 
 from app.core.db import connect
 from app.core.logging import setup_logging
-from app.routers import cards, jobs
+from app.routers import cards, jobs, workflows
 
 
 @asynccontextmanager
@@ -18,6 +18,7 @@ async def lifespan(app: FastAPI):
 app = FastAPI(title="card-pipeline", lifespan=lifespan)
 app.include_router(cards.router)
 app.include_router(jobs.router)
+app.include_router(workflows.router)
 
 
 @app.get("/health")
